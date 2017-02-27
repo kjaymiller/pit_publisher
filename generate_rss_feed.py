@@ -1,14 +1,8 @@
 from podcasts import pitpodcast, pitreflections
 from datetime import datetime
 import pytz
-from paramiko import SSHClient, AutoAddPolicy
-from scp import SCPClient
 from podcasts import podcasts
 from sys import argv
-
-ssh = SSHClient()
-ssh.set_missing_host_key_policy(AutoAddPolicy())
-ssh.connect('productivityintech.com', username='pituser')
     
 for p in podcasts:
     podcast = podcasts[p]
@@ -25,5 +19,3 @@ for p in podcasts:
 
     with open(rss_path, "w") as f:
         f.write(rss)
-        with SCPClient(ssh.get_transport()) as scp:
-            scp.put(rss_path, '/mnt/volume-sfo2-01/files/')
