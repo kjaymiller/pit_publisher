@@ -5,7 +5,7 @@ from podcasts import podcasts
 from sys import argv
 
 if len(argv) == 2:
-    casts = [argv]
+    casts = [argv[1]
 else:
     casts = podcasts
 
