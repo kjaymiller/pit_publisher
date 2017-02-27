@@ -3,8 +3,13 @@ from datetime import datetime
 import pytz
 from podcasts import podcasts
 from sys import argv
-    
-for p in podcasts:
+
+if len(argv) == 2:
+    casts = [argv]
+else:
+    casts = podcasts
+
+for p in casts:
     podcast = podcasts[p]
     print(podcast.title)
     for entry in podcast.collection.find({'published': False}):
@@ -12,8 +17,8 @@ for p in podcasts:
         publish_date = datetime.strptime(entry['publish_date'], publish_format)
 
         if publish_date < datetime.now(pytz.utc):
-            podcast.collection.find_one_and_update({'episode_number': entry['episode_number']}, {'$set':{'published': True}})
-
+            podcast.collection.find_one_and_update({'episode_number': entry['episode_number']}, {'$set':{'published': True}}) 
+            
     rss = podcast.rss()
     rss_path = '{}.rss'.format(podcast.collection_name)
 
