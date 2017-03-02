@@ -11,7 +11,6 @@ else:
 
 for p in casts:
     podcast = podcasts[p]
-    print(podcast.title)
     for entry in podcast.collection.find({'published': False}):
         publish_format = '%a, %d %b %Y %H:%M:%S %z'
         publish_date = datetime.strptime(entry['publish_date'], publish_format)
