@@ -4,7 +4,7 @@ from datetime import datetime
 from paramiko import SSHClient, AutoAddPolicy
 from scp import SCPClient
 from urllib.request import urlopen
-from config import FILE_STORAGE_LOCATION 
+from config import FILE_STORAGE_LOCATION
 import re
 import pytz
 
@@ -48,7 +48,7 @@ UPLOAD_PATH = 'posts/'
 mp3_path = UPLOAD_PATH + '{}.mp3'.format(p)
 md_path = UPLOAD_PATH + '{}.md'.format(p)
 
-print('Uploading {}  to {}' + (mp3_path, FILE_STORAGE_LOCATION)
+print('Uploading {} to {}'.format(mp3_path, FILE_STORAGE_LOCATION))
 with SCPClient(ssh.get_transport()) as scp:
     scp.put(mp3_path, FILE_STORAGE_LOCATION)
 

@@ -16,8 +16,8 @@ for p in casts:
         publish_date = datetime.strptime(entry['publish_date'], publish_format)
 
         if publish_date < datetime.now(pytz.utc):
-            podcast.collection.find_one_and_update({'episode_number': entry['episode_number']}, {'$set':{'published': True}}) 
-            
+            podcast.collection.find_one_and_update({'episode_number': entry['episode_number']}, {'$set':{'published': True}})
+
     rss = podcast.rss()
     rss_path = '{}.rss'.format(podcast.collection_name)
 
