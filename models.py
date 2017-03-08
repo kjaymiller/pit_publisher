@@ -1,4 +1,4 @@
-from config import WEBSITE_URL
+from config import WEBSITE_URL, OWNER
 from mongo import db
 from datetime import datetime
 from bson.objectid import ObjectId
@@ -77,8 +77,9 @@ class Collection():
         return rss_data
 
 class Podcast(Collection):
-    def __init__(self, title, uuid, links, collection, description, owner, abbreviation,
-                image_href, categories, keywords, subtitle, new_feed=None):
+    def __init__(self, title, uuid, links, collection, description, abbreviation,
+                image_href, categories, keywords, subtitle, new_feed=None
+                owner=OWNER):
         super().__init__(title=title, uuid=uuid, collection=collection, subtitle=subtitle)
         self.links = links
         self.description = description
@@ -143,7 +144,12 @@ class Podcast(Collection):
 
         author = feed_param('itunes:author', self.owner['name'])
         keywords = feed_param('itunes:keywords', ','.join(self.keywords))
-        new_feed = feed_param('itunes:new-feed-url', self.new_feed)
+
+        if self.new_feed:
+            new_feed = feed_param('itunes:new-feed-url', self.new_feed)
+        else:
+            new_feed = '
+            '
         categories = '\n'.join(['<itunes:category text="{}" />'.format(x) for x in self.categories])
         itunes_image = '<itunes:image href="{}" />'.format(self.image_href)
         explicit = feed_param('itunes:explicit', expl)
