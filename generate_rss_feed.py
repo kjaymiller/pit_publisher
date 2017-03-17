@@ -4,8 +4,14 @@ from ssh import ssh
 import pytz
 
 
-def update_published(podcast):
-    for entry in podcast.collection.find({'published': False}):
+def update_published(podcast, episode_number=None):
+    if episode_number:
+        episodes = podcast.collection.find({'published': False,
+                                            'episode_number': episode_number})
+    else:
+        episodes = podcast.collection.find({'published': False})
+
+    for entry in episodes
         publish_format = '%a, %d %b %Y %H:%M:%S %z'
         publish_date = datetime.strptime(entry['publish_date'], publish_format)
 
@@ -15,7 +21,6 @@ def update_published(podcast):
                 {'$set': {'published': True}})
 
     return podcast.rss()
-
 
 def upload_rss(podcast, path=RSS_LOCATION):
     rss = podcast.rss()
