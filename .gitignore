@@ -1,5 +1,7 @@
 config.py
 podcasts.py
+blog.py
+
 posts
 
 # Byte-compiled / optimized / DLL files
