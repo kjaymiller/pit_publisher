@@ -43,6 +43,7 @@ def get_duration(mp3):
     seconds = str(int(total_in_seconds%60))
     return minutes + ":" + seconds
 
+
 def author_entry(author):
     return f'''<author>
 <name>{author["name"]}</name>
@@ -50,11 +51,13 @@ def author_entry(author):
 <uri>{author["uri"]}</uri>
 </author>'''
 
+
 def published(date):
-    if datetime.strptime(date, publish_format) <= datetime.now(pytz.utc):
+    if date <= datetime.now()):
         return True
     else:
         return False
+
 publish_format = '%a, %d %b %Y %H:%M:%S %z'
 
 
@@ -93,11 +96,13 @@ class Collection():
         return header
 
     def update_published(self, val, attr="_id"):
-        obj = self.collection.find_one({attr: val})
-        publish = obj['publish_date']
-        return self.collection.find_one_and_update(
-                {attr: val},
-                {'$set':{'published': published(publish)}})
+        entries = podcast.collection.find({'published': False})
+        for entry in entries:
+            if episode.published_date >= datetime.now():
+                podcast.collection.update_one(
+                        {'episode_number', episode['episode_number']},
+                        {'$set':{published: True}})
+        return entries
 
     def upload(self, headers):
         return self.collection.insert_one(headers)
@@ -284,6 +289,3 @@ class Podcast(Collection):
         channel = feed_param('channel', feed_info)
         rss_feed = '\n'.join((rss_xml, xmlns, channel, '</rss>'))
         return rss_feed
-
-    def update_published(self, val):
-        return super().update_published(val, attr='episode_number')
