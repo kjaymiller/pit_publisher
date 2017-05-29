@@ -11,7 +11,7 @@ def update_published(podcast, episode_number=None):
     else:
         episodes = podcast.collection.find({'published': False})
 
-    for entry in episodes
+    for entry in episodes:
         publish_format = '%a, %d %b %Y %H:%M:%S %z'
         publish_date = datetime.strptime(entry['publish_date'], publish_format)
 
