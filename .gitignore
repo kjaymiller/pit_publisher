@@ -1,6 +1,5 @@
 config.py
 podcasts.py
-blog.py
 
 posts
 *.rss
