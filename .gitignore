@@ -3,6 +3,7 @@ podcasts.py
 blog.py
 
 posts
+*.rss
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
