@@ -11,7 +11,7 @@ shownotes.
 Your rss file will export in the root of the podcast upload directory
 """
 
-from CONFIG import DEFAULT_UPLOAD_SOURCE
+from config import DEFAULT_UPLOAD_SOURCE
 from sys import argv
 from podcasts import podcasts
 
@@ -22,7 +22,7 @@ podcast = podcasts[podcast_name]
 base_file = f'{DEFAULT_UPLOAD_SOURCE}'
 mp3 = f'{base_file}/{argv[1]}.mp3'
 md = f'{base_file}/{argv[1]}.md'
-podcast.get_file_content(md, mp3, ep_num)
+podcast.get_file_content(md, mp3, episode_number)
 
-with open(f'{podcast_name}.rss, 'w') as f:
+with open(f'{podcast_name}.rss', 'w') as f:
     f.write(podcast.rss())

@@ -53,7 +53,7 @@ def author_entry(author):
 
 
 def published(date):
-    if date <= datetime.now()):
+    if date <= datetime.now(pytz.utc):
         return True
     else:
         return False
@@ -90,19 +90,14 @@ class Collection():
         header['content'] = '\n'.join(content_lines)
 
         #populate publish date if not present
-        now = datetime.now(pytz.utc).strftime(publish_format)
-        header['publish_date'] = header.get('publish_date', now)
+        now = datetime.now(pytz.utc)
+        if header.get('publish_date', ''):
+            pub_date = datetime.strptime(header['publish_date'], publish_format)
+            header['publish_date'] = pub_date
+        else:
+            header['publish_date'] = datetime.now(pytz.utc)
         header['published'] = published(header['publish_date'])
         return header
-
-    def update_published(self, val, attr="_id"):
-        entries = podcast.collection.find({'published': False})
-        for entry in entries:
-            if episode.published_date >= datetime.now():
-                podcast.collection.update_one(
-                        {'episode_number', episode['episode_number']},
-                        {'$set':{published: True}})
-        return entries
 
     def upload(self, headers):
         return self.collection.insert_one(headers)
@@ -110,15 +105,14 @@ class Collection():
 
 class Blog(Collection):
     def __init__(
-            self, title, uuid, collection, default_author=OWNER, **kwargs):
+            self, title, uuid, collection, **kwargs):
         super().__init__(title=title, uuid=uuid, collection=collection)
-        self.default_author=OWNER
         self.subtitle = kwargs.get('subtitle', None)
 
     def get_file_content(self, file_data):
         header = super().get_file_content(file_data)
         header['author'] = AUTHORS[header.get('author', 'OWNER')]
-        return header
+        return super().upload(header)
 
     def atom(self):
         #feed properties
@@ -135,13 +129,14 @@ class Blog(Collection):
             subtitle = feed_param('subtitle', self.subtitle)
         else:
             subtitle = ''
-        link = f'<link rel="self" href="{FEED_LOCATION}" />'
+        link = f'<link rel="self" href="{WEBSITE_URL}/{FEED_LOCATION}" />'
         icon = feed_param('icon', FEED_ICON)
         logo = feed_param('logo', FEED_LOGO)
         rights = feed_param('rights', FEED_COPYRIGHT)
         atom_feed_info = f'''{rss_xml}
 {xmlns}
 {feed_id}
+{link}
 {feed_author}
 {updated}
 {title}
