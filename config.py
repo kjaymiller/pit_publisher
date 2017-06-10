@@ -4,7 +4,9 @@ The Base Configuration file IS
 
 from datetime import datetime
 
-# DATABASE_URL = 'mongodb://hostname/ipaddress'
+# DATABASE_URL = 'example.com'
+# USERNAME = 'myusername'
+# PASSWORD = 'DON'T_SHARE_THIS_WITH_OTHERS>'
 # PORT = 27017 (DEFAULT: Recommended that you change your defaul port)
 # DATABASE = 'database' This is the database that you use for your content
 # WEBSITE_URL = 'The URL for your website'
