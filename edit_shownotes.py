@@ -14,8 +14,8 @@ from config import DEFAULT_UPLOAD_SOURCE
 from sys import argv
 from podcasts import podcasts
 
-podcast = podcasts[argv[0]]
-episode_number = argv[1]
+podcast = podcasts[argv[1]]
+episode_number = argv[2]
 
 # Download the file to be edited
 episode = podcast.collection.find_one({'episode_number': episode_number})
