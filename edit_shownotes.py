@@ -15,19 +15,21 @@ from sys import argv
 from podcasts import podcasts
 
 podcast = podcasts[argv[1]]
-episode_number = argv[2]
+episode_number = int(argv[2])
 
 # Download the file to be edited
 episode = podcast.collection.find_one({'episode_number': episode_number})
 shownotes = episode['content']
-file_path = f'{DEFAULT_UPLOAD_SOURCE}/{shownotes}.md'
+file_name = f"{podcast.collection_name}_{episode_number}.md"
+file_path = f'{DEFAULT_UPLOAD_SOURCE}/{file_name}'
+
 with open(file_path, 'w') as f:
     f.write(shownotes)
 
 # pause and wait for enter
 phrase = """Enter 'q' or 'quit' and press return[Enter] to exit.
 The file will not be removed from your computer: """
-if input.lower() in ('quit', 'q'):
+if input(phrase).lower() not in ('quit', 'q'):
     with open(file_path, 'r') as f:
         f = f.read()
         podcast.collection.find_one_and_update(

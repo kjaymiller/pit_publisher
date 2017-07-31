@@ -1,14 +1,18 @@
-from config import WEBSITE_URL, OWNER, AUTHORS
-from config import (
-    FEED_LOCATION,
-    GENERATOR_NAME,
-    GENERATOR_URI,
-    FEED_COPYRIGHT,
-    FEED_ICON,
-    FEED_LOGO)
+from config import (WEBSITE_URL,
+                    OWNER,
+                    AUTHORS,
+                    FEED_LOCATION,
+                    GENERATOR_NAME,
+                    GENERATOR_URI,
+                    FEED_COPYRIGHT,
+                    FEED_ICON,
+                    FEED_LOGO,
+                    FILES_PATH,
+                    DEFAULT_UPLOAD_SOURCE)
+
 from datetime import datetime
 from markdown import markdown
-from mongo import db
+from mongo import db, auth
 from mutagen.mp3 import MP3
 import pytz
 import re
@@ -34,7 +38,7 @@ def feed_param(key, value, cdata=False, xhtml=False, uri=None):
     else:
         return f'<{key}>{value}</{key}>'
 
-generator = feed_param('generator', GENERATOR_NAME, uri=GENERATOR_URI)
+generator = feed_param('generator', GENERATOR_NAME)
 
 def get_duration(mp3):
     audio = MP3(mp3)
@@ -60,13 +64,40 @@ def published(date):
 
 publish_format = '%a, %d %b %Y %H:%M:%S %z'
 
+def get_html_url(content):
+    """Takes a HTML tag and returns the href or SRC"""
+    href_q = re.search(r'<a.+href="(.+)">(.+)</a>', content)
+    src_q = re.search(r'src="(.+)"', content)
+    src_alt_q = re.search(r'src=.+alt=(".+").*>', content)
+
+    if href_q:
+        return href_q.group(1), href_q.group(2)
+    elif src_q and src_alt_q:
+        return src_q.group(1), src_alt_q.group(1)
+    elif src_q and not src_alt_q:
+        return src_q.group(1), ''
+
+    else:
+        return
+
+def remove_iframes(content):
+    q = re.search(r'<div.*><iframe.+</iframe></div>', content)
+    q.group(0)
 
 class Collection():
     def __init__(self, title, collection, uuid,):
+        auth
         self.title = title
         self.collection = db[collection]
         self.collection_name = collection
         self.uuid = uuid
+
+    def set_publish_date(self, pub_date):
+        if pub_date:
+            return datetime.strptime(pub_date, publish_format)
+        else:
+            return datetime.now(pytz.utc)
+
 
     def get_file_content(self, file_data):
         with open(file_data) as f:
@@ -90,13 +121,8 @@ class Collection():
         header['content'] = '\n'.join(content_lines)
 
         #populate publish date if not present
-        now = datetime.now(pytz.utc)
-        if header.get('publish_date', ''):
-            pub_date = datetime.strptime(header['publish_date'], publish_format)
-            header['publish_date'] = pub_date
-        else:
-            header['publish_date'] = datetime.now(pytz.utc)
-        header['published'] = published(header['publish_date'])
+        pub_date = self.set_publish_date(header.get('publish_date', ''))
+        header['publish_date'] = pub_date
         return header
 
     def upload(self, headers):
@@ -192,37 +218,70 @@ class Podcast(Collection):
         self.new_feed = new_feed
         self.subtitle = subtitle
 
+    def upload_podcast_episode(self, shownotes, episode_file, episode_number='',
+                title=None, tags=None, publish_date=None):
 
-    def get_file_content(self, shownotes, episode_file, episode_number):
+        if not title:
+            title = input("Title: ")
+
+        if not tags:
+            tags = input("Tags (comma separated): ").split(',')
+
+        if not publish_date:
+            pd_input = input("Publish Date (leave blank for NOW): ")
+            publish_date = self.set_publish_date(pd_input)
+
+        with open(f'{DEFAULT_UPLOAD_SOURCE}/{shownotes}') as f:
+            content = f.read()
+
+        with open(f'{DEFAULT_UPLOAD_SOURCE}/{episode_file}', 'rb') as f:
+            length = len(f.read())
+
+        duration = get_duration(f'{DEFAULT_UPLOAD_SOURCE}/{episode_file}')
+        header = {
+            'title': title,
+            'tags': tags,
+            'publish_date': publish_date,
+            'content': content,
+            'duration': duration,
+            'published': published(publish_date),
+            'length': length,
+            'media_url': f'{WEBSITE_URL}/{FILES_PATH}/podcast/{self.collection_name}/{episode_file}'
+            }
+        if episode_number:
+            header['episode_number'] = int(episode_number)
+
+        else:
+            header['episode_number'] = None
+
+        return super().upload(header)
+
+
+    def get_file_content(self, shownotes, episode_file):
         header = super().get_file_content(shownotes)
         with open(episode_file, 'rb') as f:
             header['length'] = len(f.read())
-
         header['duration'] = get_duration(episode_file)
-        episode_number = header.get('episode_number', episode_number)
-        header['episode_number'] = int(episode_number)
-        header['published'] = published(header['publish_date'])
         return super().upload(header)
-
 
     def rss(self, language='en', expl='no'):
         rss_date_format = '%a, %d %b %Y %H:%M:%S %z'
         updated_date = datetime.now(pytz.utc).strftime(rss_date_format)
-        publish = {'published': True}
-        db_entries = self.collection.find(publish).sort('episode_number', -1)
+        db_entries = self.collection.find().sort('publish_date', -1)
         rss_entries = ''
-        podcast_url = '{}/{}'.format(WEBSITE_URL, self.collection_name)
+        podcast_url = f'{WEBSITE_URL}/{self.collection_name}'
 
         # RSS Entries
         for d in db_entries:
-            ab = self.abbreviation
-            showtitle = '{} {}: {}'.format(ab, d['episode_number'], d['title'])
-            url = '{}/{}'.format(podcast_url, d['episode_number'])
+            showtitle = d['title']
+            url=WEBSITE_URL
+
+            url = f'{podcast_url}/{d["_id"]}'
             title = feed_param('title', showtitle)
             link = feed_param('link', url)
-            enclosure_url = 'url="{}"'.format(d['media_url'])
-            length = 'length="{}"'.format(d['length'])
-            enclosure = '<enclosure {} {} type="audio/mpeg" ></enclosure>'.format(enclosure_url, length)
+            enclosure_url = f"url=\"{d['media_url']}\""
+            length = f"length=\"{d['length']}\""
+            enclosure = f'<enclosure {enclosure_url} {length} type="audio/mpeg" ></enclosure>'
             description = feed_param('description', markdown(d['content']), cdata=True)
             subtitle = feed_param('itunes:subtitle', d.get('subtitle',''), cdata=True)
             duration = feed_param('itunes:duration', d['duration'])
