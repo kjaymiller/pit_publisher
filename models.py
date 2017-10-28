@@ -108,11 +108,11 @@ class Collection():
 
         while re.search(r'^(\w+): *(.*)$', rows[index]):
             match = re.search(r'^(\w+): *(.*)$', rows[index])
-            key = match.group(1)
+            key = match.group(1).lower()
             val = match.group(2)
 
-            if ';' in val:
-                val = val.split(';')
+            if key == 'tags':
+                val = val.split(',')
             header[key] = val
             index += 1
 
@@ -142,7 +142,7 @@ class Blog(Collection):
 
     def atom(self):
         #feed properties
-        atom_date_fmt = '%Y-%m-%dT%H:%M:%SZ'
+        atom_date_fmt = '%Y-%m-%dT%H:%M:%S'
         updated_date = datetime.now(pytz.utc).strftime(atom_date_fmt)
         rss_xml = '<?xml version="1.0" encoding="UTF-8"?>'
         xmlns = '<feed xmlns= "http://www.w3.org/2005/Atom">'
@@ -218,7 +218,7 @@ class Podcast(Collection):
         self.new_feed = new_feed
         self.subtitle = subtitle
 
-    def upload_podcast_episode(self, shownotes, episode_file, episode_number='',
+    def upload_podcast_episode(self, episode_file, shownotes=None, episode_number='',
                 title=None, tags=None, publish_date=None):
 
         if not title:
@@ -231,13 +231,18 @@ class Podcast(Collection):
             pd_input = input("Publish Date (leave blank for NOW): ")
             publish_date = self.set_publish_date(pd_input)
 
-        with open(f'{DEFAULT_UPLOAD_SOURCE}/{shownotes}') as f:
-            content = f.read()
+        if shownotes:
+            with open(shownotes) as f:
+                content = f.read()
+        else:
+            content = title
 
-        with open(f'{DEFAULT_UPLOAD_SOURCE}/{episode_file}', 'rb') as f:
+
+        with open(episode_file, 'rb') as f:
             length = len(f.read())
 
-        duration = get_duration(f'{DEFAULT_UPLOAD_SOURCE}/{episode_file}')
+        duration = get_duration(episode_file)
+        episode_file_name = episode_file.split('/', 1)[1]
         header = {
             'title': title,
             'tags': tags,
@@ -246,7 +251,7 @@ class Podcast(Collection):
             'duration': duration,
             'published': published(publish_date),
             'length': length,
-            'media_url': f'{WEBSITE_URL}/{FILES_PATH}/podcast/{self.collection_name}/{episode_file}'
+            'media_url': f'{WEBSITE_URL}/{FILES_PATH}/podcast/{episode_file_name}'
             }
         if episode_number:
             header['episode_number'] = int(episode_number)
@@ -265,7 +270,7 @@ class Podcast(Collection):
         return super().upload(header)
 
     def rss(self, language='en', expl='no'):
-        rss_date_format = '%a, %d %b %Y %H:%M:%S %z'
+        rss_date_format = '%a, %d %b %Y %H:%M:%S'
         updated_date = datetime.now(pytz.utc).strftime(rss_date_format)
         db_entries = self.collection.find().sort('publish_date', -1)
         rss_entries = ''
@@ -285,7 +290,8 @@ class Podcast(Collection):
             description = feed_param('description', markdown(d['content']), cdata=True)
             subtitle = feed_param('itunes:subtitle', d.get('subtitle',''), cdata=True)
             duration = feed_param('itunes:duration', d['duration'])
-            pub_date = feed_param('pubDate', d['publish_date'])
+            format_date = datetime.strftime(d['publish_date'], rss_date_format) #Convert to RSS Approved Date
+            pub_date = feed_param('pubDate', format_date + ' +0000')
             explicit = feed_param('itunes:explicit', expl)
             keywords = feed_param('itunes:keywords', ','.join(d['tags']))
             fields = (
@@ -306,8 +312,8 @@ class Podcast(Collection):
 
         # channel Properties
         title = feed_param('title', self.title)
-        pub_date = feed_param('pubDate', updated_date)
-        last_build_date = feed_param('lastBuildDate', updated_date)
+        pub_date = feed_param('pubDate', updated_date + ' +0000')
+        last_build_date = feed_param('lastBuildDate', updated_date + ' +0000')
         link = feed_param('link', podcast_url)
         language = feed_param('language', language)
         docs = feed_param('docs', podcast_url)

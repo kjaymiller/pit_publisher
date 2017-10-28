@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns= "http://www.w3.org/2005/Atom">
 <id>urn:uuid:97c7907f-1503-48ce-b37f-6cbfeff1d042</id>
-<link rel="self" href="http://productivityintech.com/files/feed.xml" />
+<link rel="self" href="https://productivityintech.com/files/feed.xml" />
 <author>
 <name>Jay Miller</name>
 <email>kjaymiller@gmail.com</email>
 <uri>http://productivityintech.com</uri>
 </author>
-<updated>2017-07-01T07:01:07Z</updated>
+<updated>2017-08-27T02:53:41Z</updated>
 <title>Productivity in Tech Blog</title>
 <subtitle>Posts from the Productivity in Tech Blog.</subtitle>
 <icon>files/images/feed_icon.png</icon>
 <logo>files/image/feed_logo.png</logo>
-<generator uri="https://github.com/kjaymiller/podcast_publisher">
-  Productivity in Tech RSS Generator
-</generator>
+<generator>Productivity in Tech RSS Generator</generator>
 <rights>© 2017</rights>
 <entry>
-  <id>http://productivityintech.com/blog/5957488b791e4b368a0b9f60</id>
-  <title>Productivity Should Be Fun</title>
-  <updated>2017-07-01T07:00:27Z</updated>
+  <id>https://productivityintech.com/blog/59a23435791e4b4e4e0e2f85</id>
+  <title>Simple Ideas are Easier to Use and Implement</title>
+  <updated>2017-08-27T02:53:41Z</updated>
   <author>
 <name>Jay Miller</name>
 <email>kjaymiller@gmail.com</email>
@@ -27,16 +25,111 @@
 </author>
   <content type="xhtml">
   <div xmlns="http://www.w3.org/1999/xhtml">
-    <p>So most people wouldn't call banging your head against an hard automation problem fun but I do. In fact I think the best way to become more productive is to have some fun with it.</p>
-<p>I had fun tonight creating a <a href="https://github.com/kjaymiller/alfred-buffer">rapid-scheduling buffer Workflow for Alfred</a>. Although it's not perfect (or completely finished at this point) I overcame several challenges and received the awesome sense of accomplishment in the end. </p>
-<p><img alt="" src="http://i.imgur.com/u5HDCTv.gif" /></p>
-<p>Challenge yourself to solve hard problems, but have fun in the process. This is how you make your productivity "interesting".</p>
+    <p>When an idea strikes, we are often inspired to develop the idea into an elaborate project. In our minds this can add value to the project, but these "enhancements" often restrict the use case of the project and discourages engagement.</p>
+<p>A great example of this was a workflow that I created for the writing app <a href="https://www.ulyssesapp.com">Ulysses</a>. I wanted to be able to create an outline or Table of Contents and have it create a Ulysses group (folder) and sheets for each section.</p>
+<p>The workflow didn't take much time and after a bit of testing and tweaking, I was ready to share my creation with the <a href="https://productivityintech.com/join">Premium Members</a>.</p>
+<h2>Problems with the First Version</h2>
+<p>The <a href="https://workflow.is/workflows/1f2605608aeb4b00a4bbe659aef143b2">first version</a> of the of the workflow was nice, but there were a few issues that I knew I would need to address. The first was that in order to run the workflow, you would need to create the outline in Ulysses, copy the sheet identifier, and then run the workflow. Once it was finished, you then had to open Ulysses again and add the original outline to the new group.</p>
+<p><img alt="" src="http://productivityintech.com/files/images/IMG_2286.67a0cb617a8a448a81c6f1fde137e78e.GIF" /></p>
+<p>While I was fine with this workflow, but after sharing, there were a few people that ran into problems with running the workflow.</p>
+<p><img alt="" src="http://productivityintech.com/files/images/1503799173.png" />
+You see I had written the program based my usage and shared with without thinking about how others my run the workflow.</p>
+<h2>The Fix</h2>
+<p>In the <a href="https://workflow.is/workflows/1f2605608aeb4b00a4bbe659aef143b2">second version</a> of the workflow, I removed lines that only accepted Ulysses as the input. This made it so that you could load your text from any iOS app. By doing thing I was also able to fix the issue with the original content not being added to the sheet as well (without any pesky duplication).</p>
+<p><img alt="" src="https://productivityintech.com/files/images/IMG_2292.GIF" /></p>
+<p>I had introduced extra complexity and, because of that, the workflow wasn't simple enough to figure out. By taking another look, I was able to make the workflow more useful for me (and others) and also fixed issues that I was creating for myself.</p>
+<p><img alt="" src="https://productivityintech.com/files/images/B&amp;A_ulysses_toc_workflow.png" /></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5957488b791e4b368a0b9f60" />
+  <link rel="alternate" href="https://productivityintech.com/blog/59a23435791e4b4e4e0e2f85" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5955d85f791e4b82a4901a76</id>
+  <id>https://productivityintech.com/blog/59a0cf86791e4b4759931cfe</id>
+  <title>Why my Episodes No Longer have Episode Numbers</title>
+  <updated>2017-08-26T01:31:50Z</updated>
+  <author>
+<name>Jay Miller</name>
+<email>kjaymiller@gmail.com</email>
+<uri>http://productivityintech.com</uri>
+</author>
+  <content type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <p><em>Its a Sunday at 3pm...</em>
+I should be relaxing but instead I'm deep into code. Not <em>"new exciting code that will revolutionize the productivity industry as we know it!</em>", mostly just refactoring. the art of making old code <em>more efficient</em>. Mostly just deleting lines of code like the ones in the image below.</p>
+<p><img alt="Removing Episode Numbers from My Code" src="http://productivityintech.com/files/images/remove_ep_numbers.png" /></p>
+<p>I recently made the decision that PIT was going to be going through some changes. One of those changes was the removal of its episode number system from the <em>Productivity in Tech Podcast</em>.</p>
+<p>While episode numbers are a normal part of podcasts, I feel like adding them to the PIT episodes creates a false sense of success and  discourages exploration into older episodes.</p>
+<h2>Shifting the Mindset</h2>
+<p>At Apple's latest WWDC, it was announced that  Apple's feed spec (the most commonly used) was going to add new features like <a href="https://sixcolors.com/post/2017/06/apple-makes-major-podcast-updates/">episode classifications and whether you should listen to the latest episode or start at the beginning.</a></p>
+<p>I feel like the PIT Podcast isn't made for either. While you can stay up to date with the latest episodes <strong>released every Monday</strong>, its our goal to ensure that we have an episode that fits the situation you may be in. <em>Obviously, we can't cover everything</em> but I want to focus on as many issues as possible. (You can let me know what topics you'd be interested in by using the hashtag #PITQuestions on <a href="https://twitter.com/prodintech" title="Twitter Profile - Prodintech">twitter</a>)</p>
+<p>You will see an emphasis on this more and more throughout the site. I hope that you feel more encouraged to look for episodes that call to you and check connect with some of the amazing  professionals that we have worked with in the show.</p>
+  </div>
+</content>
+  <link rel="alternate" href="https://productivityintech.com/blog/59a0cf86791e4b4759931cfe" />
+</entry>
+<entry>
+  <id>https://productivityintech.com/blog/599a5df4791e4be8d2cfa6b9</id>
+  <title>Website Redesigns Help Maintain the Mission</title>
+  <updated>2017-08-21T04:13:40Z</updated>
+  <author>
+<name>Jay Miller</name>
+<email>kjaymiller@gmail.com</email>
+<uri>http://productivityintech.com</uri>
+</author>
+  <content type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <p>Nothing is ever perfect for me. The <em>Productivity in Tech</em> website is no different. As my mood changes so does my ideas on what makes good design. This is why I made the decision to not use a template and instead build my site to my liking from the ground up.</p>
+<p>Now this is a very unproductive task, but it allows me to do something that is extremely valuable. Every time I'm modifying the look and feel of my website, I am reminding myself of how the look is supposed to reflect the brand.</p>
+<p><img alt="" src="http://productivityintech.com/files/images/pit-website-concept.jpg" title="Early PIT Concept" />
+The website has changed its look over the past 18 months but one thing remains the same. Productivity in Tech will always be passionate about bringing you content that provides authentic and realistic help in achieving more in your life! So while I may be distracted from time to time, it's important that I remember that goal any way I can.</p>
+  </div>
+</content>
+  <link rel="alternate" href="https://productivityintech.com/blog/599a5df4791e4be8d2cfa6b9" />
+</entry>
+<entry>
+  <id>https://productivityintech.com/blog/59912c6e791e4b4ee5856ebc</id>
+  <title>Monthly (or More) Newsletter Posts for Premium Members</title>
+  <updated>2017-08-14T04:51:58Z</updated>
+  <author>
+<name>Jay Miller</name>
+<email>kjaymiller@gmail.com</email>
+<uri>http://productivityintech.com</uri>
+</author>
+  <content type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <p>I'm only going to post to the newsletter regularly for the pit premium members once a month. The newsletter will have some information about PIT and things that I'm interested in from a productivity standpoint.</p>
+<p>It will go to their email, but will also be posted in the PIT premium slack team.</p>
+<p>Signup to become a <a href="https://productivityintech.com/premium">Premium Member</a></p>
+  </div>
+</content>
+  <link rel="alternate" href="https://productivityintech.com/blog/59912c6e791e4b4ee5856ebc" />
+</entry>
+<entry>
+  <id>https://productivityintech.com/blog/59912c5e791e4b4eb830e0be</id>
+  <title>It's always 1 or 0</title>
+  <updated>2017-08-14T04:51:42Z</updated>
+  <author>
+<name>Jay Miller</name>
+<email>kjaymiller@gmail.com</email>
+<uri>http://productivityintech.com</uri>
+</author>
+  <content type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <p>In the tech world, 1's and 0's are everything. It is a matter of "Yes" or "No", or "On" and "Off". Many people like to examine the world as a bunch of possibilities. There are many options available to you other than just yes and no. </p>
+<p>Well Sort of... </p>
+<p>I was reminded of this by watching <em>Mr. Robot</em>. In Episode 2, Mr. Robot unveils a part of his secret plan. When Elliot pushes back on the request, Mr. Robot delivers the ultimatum. </p>
+<blockquote>
+<p>"Sure, there are grays, but when you come right down to it, at its core, beneath every choice there's either a 1 or a 0. Either you do something or you don't."</p>
+</blockquote>
+<p>Mr. Robot's lack of compassion is questionable but his idea behind choosing a course of action is spot on. When we make a choice, no matter that decision is, we are saying 1 (Yes) to something and 0 (No) to other things.  We have two things that we must do.
+1. We must look at all the consequences of our decisions
+2. be okay with accepting that we have chosen  those consequences. </p>
+  </div>
+</content>
+  <link rel="alternate" href="https://productivityintech.com/blog/59912c5e791e4b4eb830e0be" />
+</entry>
+<entry>
+  <id>https://productivityintech.com/blog/5955d85f791e4b82a4901a76</id>
   <title>How to Get Back Into the Swing of Things After a Hard Time</title>
   <updated>2017-06-30T04:49:35Z</updated>
   <author>
@@ -60,10 +153,10 @@
 <p>It takes time but you will recover. You will get better. How do you get back into the swing of things. One step at a time. Soon I will be achieving the goals that I have for my life, and that will allow me to spend more time with my family and do more of the things that bring me joy. </p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5955d85f791e4b82a4901a76" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5955d85f791e4b82a4901a76" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5948ae2a791e4b4706ed712f</id>
+  <id>https://productivityintech.com/blog/5948ae2a791e4b4706ed712f</id>
   <title>Growth Through Sharing (and a Little EDM)</title>
   <updated>2017-06-20T05:10:02Z</updated>
   <author>
@@ -87,10 +180,10 @@
 <p><img alt="" src="http://productivityintech.com/files/images/black%20and%20red%20present.png" /></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5948ae2a791e4b4706ed712f" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5948ae2a791e4b4706ed712f" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/593e9d44791e4b6759240b9b</id>
+  <id>https://productivityintech.com/blog/593e9d44791e4b6759240b9b</id>
   <title>Weekly Recap, June 5-11, 2017</title>
   <updated>2017-06-12T13:55:16Z</updated>
   <author>
@@ -111,6 +204,7 @@
 <p><img alt="Castro app" src="http://www.appleyra.se/wp-content/uploads/2016/11/Castro-banner.jpg" /></p>
 <h2>Videos</h2>
 <p>There was a lot of chatter from our professionals. Even though we didn't release any videos there was enough content to go around from <a href="https://www.youtube.com/user/cesidalessio">Francesco</a>, <a href="https://www.youtube.com/channel/UCE_lTvaMHuco_Oh3-69LkCA">Carl</a> and <a href="https://www.youtube.com/channel/UCl8eugrGayFDPRZ9TwxDOCw">Enrico</a>.</p>
+<div style="position:relative;height:0;padding-bottom:75.0%"><iframe src="https://www.youtube.com/embed/ekINZgo364I?ecver=2" width="480" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>
 
 <h2>Books and Reading</h2>
 <p>I've really been enjoying reading <a href="http://amzn.to/2ra3OkQ"><em>Die Empty</em></a> by Todd Henry. I've also been working my way through Malcom Gladwell's <em><a href="http://amzn.to/2raeQXc">The Tipping Point</a></em> </p>
@@ -118,10 +212,10 @@
 <p><strong>That's it for this week. Of course there was a lot of great information in the <a href="http://productivityintech.com/fb">Facebook group</a> as well. I hope that you be on the look out for more great content from Productivity in Tech!</strong></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/593e9d44791e4b6759240b9b" />
+  <link rel="alternate" href="https://productivityintech.com/blog/593e9d44791e4b6759240b9b" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/593d897d791e4bf8b98b8d9d</id>
+  <id>https://productivityintech.com/blog/593d897d791e4bf8b98b8d9d</id>
   <title>Holy Productivity Batman! - RIP Adam West</title>
   <updated>2017-06-11T18:18:37Z</updated>
   <author>
@@ -155,10 +249,10 @@
 <p>This reminds that we are often known for one/few things in our life, but that doesn't define who we are. Whether you are a scientist, a mother, or just someone who is always doing something different (me 🙋🏾‍♂️), be sure to not let what people call or define you as limit your ability to enjoy life!</p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/593d897d791e4bf8b98b8d9d" />
+  <link rel="alternate" href="https://productivityintech.com/blog/593d897d791e4bf8b98b8d9d" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/593b854f791e4be3de83d07d</id>
+  <id>https://productivityintech.com/blog/593b854f791e4be3de83d07d</id>
   <title>Your Self-Curated Podcast Playlist with Castro</title>
   <updated>2017-06-10T05:36:15Z</updated>
   <author>
@@ -193,12 +287,15 @@
 <p>Searching is done on Castros server and resulting in less data and battery usage. The app also have support for iMessage which makes it even easier to share episodes.</p>
 <p>Castro is a well made app with many smart features. For people who follow many different podcast and jump around between single episodes, Castro is the best app on the market.</p>
 <p><strong><a href="https://itunes.apple.com/us/app/castro-play-share-podcasts/id1080840241?mt=8&amp;uo=4&amp;at=10lKZy&amp;ct=pit"><em>Castro</em> — Play and Share Podcasts - App Store</a> [$ 4.99]</strong></p>
+<div style="position:relative;height:0;padding-bottom:75.0%"><iframe src="https://www.youtube.com/embed/agVUjPjt8yA?ecver=2" width="480" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>
+
+<p><span> video by Supertop </span></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/593b854f791e4be3de83d07d" />
+  <link rel="alternate" href="https://productivityintech.com/blog/593b854f791e4be3de83d07d" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5938da30791e4b528e168b70</id>
+  <id>https://productivityintech.com/blog/5938da30791e4b528e168b70</id>
   <title>The Practical Guide to Overcome "Not Feeling It"</title>
   <updated>2017-06-08T05:01:36Z</updated>
   <author>
@@ -250,10 +347,10 @@
 <p>So I hope that in reading this you have gotten a few ideas on how to make it through your rut. I wasn't feeling it when I started writing this, but I became absorbed into the work and I was focused and motivated by the time it was done!</p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5938da30791e4b528e168b70" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5938da30791e4b528e168b70" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5930e35b791e4b6b0733d7bb</id>
+  <id>https://productivityintech.com/blog/5930e35b791e4b6b0733d7bb</id>
   <title>Recap the Week: May 29 - June 2, 2017</title>
   <updated>2017-06-02T23:30:00Z</updated>
   <author>
@@ -286,10 +383,10 @@
 <p>I also got the <a href="http://productivityintech.com/files/feed.xml">atom feed</a> back online and would love if you subscribed to it! </p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5930e35b791e4b6b0733d7bb" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5930e35b791e4b6b0733d7bb" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5930d377791e4b4c38ac6f5a</id>
+  <id>https://productivityintech.com/blog/5930d377791e4b4c38ac6f5a</id>
   <title>Putting Social Media in the Friend Zone</title>
   <updated>2017-06-01T19:54:47Z</updated>
   <author>
@@ -336,7 +433,7 @@
 </ul>
 <p>If you have problems telling yourself no. I recommend putting your devices into "Do not Use Mode". I use focus to block certain websites on my Mac after a certain time. I also use Forest and SleepTown on my phone to remind myself that I am not allowed to use my phone. </p>
 <h2>Make New Friends</h2>
-<p>I love my "online" friends, but I'm always looking for new ones.
+<p>I love my "online" friends, but I'm always looking for new ones. 
 Meeting new people is fun! </p>
 <p>I've also met many more by joining a few local communities. In fact I wrote this post while at a <a href="https://www.meetup.com/Shut-Up-Write-SDNC/events/240004303/">meet up for writers</a>. </p>
 <p><img alt="Go Places, Meet People, Have Fun" src="http://productivityintech.com/files/images/meetup-on-rocks.png" /></p>
@@ -351,10 +448,10 @@ Meeting new people is fun! </p>
 <p>Do you remember those professionals that I mentioned earlier. I'm now building actual relationships with them. I'm becoming a professional myself. When I do use social media, it's with a sense of control now the relationship has been adequately defined. </p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5930d377791e4b4c38ac6f5a" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5930d377791e4b4c38ac6f5a" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/592cc9bb791e4b56e59f84d9</id>
+  <id>https://productivityintech.com/blog/592cc9bb791e4b56e59f84d9</id>
   <title>THEORY: Making Things Similar Help with Mental Fatigue</title>
   <updated>2017-05-29T18:24:11Z</updated>
   <author>
@@ -371,10 +468,10 @@ Meeting new people is fun! </p>
 <p>The changes in that manner make a big difference in the overall performance of all of the things that surround the website. This includes the more important podcasts, blog, and videos.</p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/592cc9bb791e4b56e59f84d9" />
+  <link rel="alternate" href="https://productivityintech.com/blog/592cc9bb791e4b56e59f84d9" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/5928f2b6791e4bb00bf7cca0</id>
+  <id>https://productivityintech.com/blog/5928f2b6791e4bb00bf7cca0</id>
   <title>My Small Win and Why It's Important</title>
   <updated>2017-05-27T03:29:31Z</updated>
   <author>
@@ -399,10 +496,10 @@ Meeting new people is fun! </p>
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/TIL?src=hash">#TIL</a> how to convert strings to date time fields in MongoDB!</p>- Jay Miller (@kjaymiller) <a href="https://twitter.com/kjaymiller/status/868304451827777536">May 27, 2017</a></blockquote> <script  src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/5928f2b6791e4bb00bf7cca0" />
+  <link rel="alternate" href="https://productivityintech.com/blog/5928f2b6791e4bb00bf7cca0" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/590939df791e4b80a19cf65d</id>
+  <id>https://productivityintech.com/blog/590939df791e4b80a19cf65d</id>
   <title>Not Your Granddad (or anyone else's) Productivity</title>
   <updated>2017-05-03T02:01:00Z</updated>
   <author>
@@ -423,10 +520,10 @@ Meeting new people is fun! </p>
 <p>This was one of the reasons I started the <a href="http://productivityintech.com/pitpodcast">Productivity in Tech Podcast</a>. It was to give equal value to the opinions of those being productive as a profession as well as those who were simply just being productive to achieve the quality of work and life that they hold today. </p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/590939df791e4b80a19cf65d" />
+  <link rel="alternate" href="https://productivityintech.com/blog/590939df791e4b80a19cf65d" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/590181ba791e4bdf2a7a4e36</id>
+  <id>https://productivityintech.com/blog/590181ba791e4bdf2a7a4e36</id>
   <title>Simplifying PIT</title>
   <updated>2017-04-27T05:29:30Z</updated>
   <author>
@@ -496,10 +593,10 @@ Meeting new people is fun! </p>
 <p>This will allow me to work on more things that will help PIT grow into a self-sustaining product that goes in line with what seems to be the logical path for it.</p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/590181ba791e4bdf2a7a4e36" />
+  <link rel="alternate" href="https://productivityintech.com/blog/590181ba791e4bdf2a7a4e36" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/58ed3f0d791e4b02fc28e011</id>
+  <id>https://productivityintech.com/blog/58ed3f0d791e4b02fc28e011</id>
   <title>BusyCal - A Powerful option on iOS</title>
   <updated>2017-04-11T20:39:31Z</updated>
   <author>
@@ -546,10 +643,10 @@ Meeting new people is fun! </p>
 <p><strong><a href="https://itunes.apple.com/se/app/*BusyCal*-calendar-reminders/id1035689743?mt=8&amp;amp;up=4&amp;amp;at=10lKZy&amp;amp;ct=pit"><em>BusyCal</em> - Calendar, Reminders &amp; To Dos - App Store</a> [$ 4.99]</strong></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/58ed3f0d791e4b02fc28e011" />
+  <link rel="alternate" href="https://productivityintech.com/blog/58ed3f0d791e4b02fc28e011" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/58e4fa23791e4b375b8da582</id>
+  <id>https://productivityintech.com/blog/58e4fa23791e4b375b8da582</id>
   <title>Living in a Distraction Free Forest</title>
   <updated>2017-04-04T14:07:29Z</updated>
   <author>
@@ -585,10 +682,10 @@ Meeting new people is fun! </p>
 <p><a href="https://geo.itunes.apple.com/us/app/forest-stay-focused-be-present/id866450515?mt=8&amp;amp;uo=4&amp;amp;at=1001lqpL">Forest - iOS $1.99</a></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/58e4fa23791e4b375b8da582" />
+  <link rel="alternate" href="https://productivityintech.com/blog/58e4fa23791e4b375b8da582" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/58d5f038791e4b85985b7a35</id>
+  <id>https://productivityintech.com/blog/58d5f038791e4b85985b7a35</id>
   <title>How 30 of Exercise or Less Really Does Help my Focus and Energy</title>
   <updated>2017-03-25T04:21:07Z</updated>
   <author>
@@ -620,10 +717,10 @@ Meeting new people is fun! </p>
 <p>It's been less than a month and I need more consistency before I can call it a habit. I do hope to get to that point as I can only imagine how the long term benefits would great increase my focus, flow, and productivity.</p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/58d5f038791e4b85985b7a35" />
+  <link rel="alternate" href="https://productivityintech.com/blog/58d5f038791e4b85985b7a35" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/58457f72791e4bab7a08fa88</id>
+  <id>https://productivityintech.com/blog/58457f72791e4bab7a08fa88</id>
   <title>Just Breathe with Breathing Space</title>
   <updated>2016-12-05T06:53:00Z</updated>
   <author>
@@ -664,10 +761,10 @@ Meeting new people is fun! </p>
 <p><strong><a href="https://itunes.apple.com/se/app/breathing-space/id960173337?mt=8&amp;uo=4&amp;at=10lKZy&amp;ct=pit">Breathing Space - App Store</a>[$ 0.99]</strong></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/58457f72791e4bab7a08fa88" />
+  <link rel="alternate" href="https://productivityintech.com/blog/58457f72791e4bab7a08fa88" />
 </entry>
 <entry>
-  <id>http://productivityintech.com/blog/582a2f07791e4b3adfda7838</id>
+  <id>https://productivityintech.com/blog/582a2f07791e4b3adfda7838</id>
   <title>Changes To Productivity In Tech On The Server Side And Why We Were Not Publishing</title>
   <updated>2016-11-14T21:39:19Z</updated>
   <author>
@@ -743,6 +840,6 @@ Meeting new people is fun! </p>
 <p>Of course with any migration there may be a bug or two. Please let us know by sending us some <a href="http://productivityintech.com/feedback">feedback</a>!</p></p>
   </div>
 </content>
-  <link rel="alternate" href="http://productivityintech.com/blog/582a2f07791e4b3adfda7838" />
+  <link rel="alternate" href="https://productivityintech.com/blog/582a2f07791e4b3adfda7838" />
 </entry>
 </feed>
